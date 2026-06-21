@@ -148,7 +148,7 @@ async function initializeStorage() {
 // DOWNLOAD ROUTES - One Click Installers
 // ============================================
 
-const INSTALLER_DIR = path.join(__dirname, '..', 'nexus-tool', 'installers');
+const INSTALLER_DIR = path.join(__dirname, 'installers');
 
 // Serve installer page
 app.get('/install', (req, res) => {
@@ -174,6 +174,8 @@ app.get('/download/run-linux.sh', (req, res) => {
 app.get('/download/run-all.sh', (req, res) => {
     res.download(path.join(INSTALLER_DIR, 'run-all.sh'));
 });
+
+
 
 // ============================================
 // API ROUTES
