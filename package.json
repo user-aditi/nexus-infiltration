@@ -1,23 +1,15 @@
 {
   "name": "nexus-infiltration",
-  "description": "Advanced System Infiltration & Live Monitoring Tool - Hackathon Project",
-  "main": "nexus.js",
+  "version": "1.0.0",
+  "description": "NEXUS INFILTRATION - Advanced System Tool",
+  "main": "server.js",
   "scripts": {
-    "start": "node nexus.js",
-    "safe": "node nexus.js --safe",
-    "server": "node server.js",
-    "deploy": "node server.js"
+    "start": "node server.js",
+    "tool": "node nexus.js"
   },
   "dependencies": {
     "express": "^4.18.2",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1"
-  },
-  "keywords": [
-    "hackathon",
-    "system-info",
-    "security",
-    "infiltration"
-  ],
-  "license": "MIT"
+  }
 }
