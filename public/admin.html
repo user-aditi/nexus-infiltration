@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔐 NEXUS Admin Dashboard</title>
+    <style>
+        :root {
+            --bg: #060912; --card: #0d1117; --border: #1a1a2e;
+            --green: #00ff88; --cyan: #00d4ff; --purple: #8b5cf6;
+            --red: #ff3333; --yellow: #f59e0b; --text: #e2e8f0; --gray: #7c8aa0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; min-height: 100vh; }
+        
+        .login-screen { position: fixed; inset: 0; background: var(--bg); display: flex; align-items: center; justify-content: center; z-index: 9999; }
+        .login-box { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; width: 380px; }
+        .login-box .icon { font-size: 3em; margin-bottom: 16px; }
+        .login-box h2 { margin-bottom: 8px; }
+        .login-box p { color: var(--gray); font-size: 0.85em; margin-bottom: 20px; }
+        .login-box input { width: 100%; padding: 12px 16px; background: #060810; border: 1px solid var(--border); color: var(--text); border-radius: 8px; margin: 10px 0; font-family: inherit; font-size: 1em; outline: none; }
+        .login-box input:focus { border-color: var(--green); }
+        .login-box button { width: 100%; padding: 14px; background: linear-gradient(135deg, var(--green), var(--cyan)); color: #000; border: none; border-radius: 8px; font-weight: 700; font-size: 1em; cursor: pointer; font-family: inherit; margin-top: 12px; }
+        .login-error { color: var(--red); font-size: 0.85em; margin-top: 8px; display: none; }
+        
+        .hidden { display: none !important; }
+        
+        .header { background: var(--card); border-bottom: 2px solid var(--border); padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .header h1 { font-size: 1.3em; background: linear-gradient(135deg, var(--green), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .badge { padding: 5px 12px; border-radius: 15px; font-size: 0.75em; font-weight: 600; }
+        .badge-live { background: rgba(0,255,136,0.1); border: 1px solid var(--green); color: var(--green); }
+        .badge-admin { background: rgba(139,92,246,0.1); border: 1px solid var(--purple); color: var(--purple); }
+        .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); display: inline-block; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(0,255,136,0.4); } 50% { box-shadow: 0 0 0 8px rgba(0,255,136,0); } }
+        .logout-btn { background: transparent; border: 1px solid var(--red); color: var(--red); padding: 6px 14px; border-radius: 15px; cursor: pointer; font-size: 0.75em; font-family: inherit; }
+        
+        .container { max-width: 1300px; margin: 0 auto; padding: 20px; }
+        .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 20px; }
+        .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+        .stat-number { font-size: 2em; font-weight: 900; background: linear-gradient(135deg, var(--green), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .stat-label { color: var(--gray); font-size: 0.72em; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+        
+        .panel { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 18px; }
+        .panel-title { font-size: 1.05em; font-weight: 700; margin-bottom: 14px; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } .stats-row { grid-template-columns: repeat(2, 1fr); } }
+        
+        table { width: 100%; border-collapse: collapse; font-size: 0.8em; }
+        th { text-align: left; color: var(--gray); padding: 10px; border-bottom: 2px solid var(--border); font-size: 0.72em; text-transform: uppercase; white-space: nowrap; }
+        td { padding: 8px 10px; border-bottom: 1px solid rgba(26,26,46,0.5); white-space: nowrap; }
+        .threat-CRITICAL { color: var(--red); font-weight: 700; }
+        .threat-HIGH { color: var(--yellow); font-weight: 600; }
+        .threat-MEDIUM { color: var(--cyan); }
+        .threat-LOW { color: var(--green); }
+        .mono { font-family: 'Courier New', monospace; font-size: 0.8em; color: var(--green); }
+        
+        .latest-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+        .latest-item { padding: 10px; background: rgba(255,255,255,0.02); border-radius: 6px; }
+        .latest-label { color: var(--gray); font-size: 0.7em; text-transform: uppercase; }
+        .latest-value { color: var(--text); font-size: 0.9em; font-weight: 500; margin-top: 2px; word-break: break-all; }
+        
+        .dist-item { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+        .dist-label { min-width: 80px; font-size: 0.8em; color: var(--gray); }
+        .dist-bar-container { flex: 1; height: 16px; background: var(--border); border-radius: 4px; overflow: hidden; }
+        .dist-bar { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
+        .dist-count { min-width: 30px; text-align: right; font-size: 0.8em; font-weight: 600; }
+        .empty-state { text-align: center; padding: 30px; color: var(--gray); }
+        .refresh-info { text-align: center; color: var(--gray); font-size: 0.75em; margin-top: 10px; }
+        footer { text-align: center; padding: 20px; color: var(--gray); font-size: 0.75em; border-top: 1px solid var(--border); margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <!-- LOGIN SCREEN -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-box">
+            <div class="icon">🔐</div>
+            <h2>Admin Dashboard</h2>
+            <p>Enter the admin password</p>
+            <input type="password" id="adminPassword" placeholder="Password" onkeypress="if(event.key==='Enter')login()" autofocus>
+            <button onclick="login()">🔓 Unlock</button>
+            <p class="login-error" id="loginError">❌ Wrong password</p>
+        </div>
+    </div>
+
+    <!-- MAIN DASHBOARD -->
+    <div id="mainDashboard" class="hidden">
+        <div class="header">
+            <h1>⚡ NEXUS INFILTRATION - Admin</h1>
+            <div>
+                <span class="badge badge-live"><span class="live-dot"></span> LIVE</span>
+                <span class="badge badge-admin">🔐 ADMIN</span>
+                <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="stats-row">
+                <div class="stat-card"><div class="stat-number" id="totalRuns">0</div><div class="stat-label">Total Runs</div></div>
+                <div class="stat-card"><div class="stat-number" id="uniqueSystems">0</div><div class="stat-label">Unique Systems</div></div>
+                <div class="stat-card"><div class="stat-number" id="totalInfected">0</div><div class="stat-label">Files Infected</div></div>
+                <div class="stat-card"><div class="stat-number" id="totalEnv">0</div><div class="stat-label">Env Vars Found</div></div>
+                <div class="stat-card"><div class="stat-number" id="kingCount">0</div><div class="stat-label">👑 Kings</div></div>
+            </div>
+
+            <div class="two-col">
+                <div class="panel">
+                    <div class="panel-title">🕵️ Latest Operation</div>
+                    <div id="latestRunContent"><div class="empty-state">⏳ Waiting...</div></div>
+                </div>
+                <div class="panel">
+                    <div class="panel-title">🛡️ Threat Distribution</div>
+                    <div id="threatDist"><div class="empty-state">No data</div></div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-title">📊 Recent Operations</div>
+                <div style="overflow-x:auto;">
+                    <table>
+                        <thead><tr><th>#</th><th>Mission ID</th><th>Time</th><th>Hostname</th><th>OS</th><th>CPU</th><th>Threat</th><th>Infected</th><th>Env</th></tr></thead>
+                        <tbody id="runsTableBody"><tr><td colspan="9" style="text-align:center;color:var(--gray);padding:20px;">No data</td></tr></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-title">💻 OS Distribution</div>
+                <div id="osDist"><div class="empty-state">No data</div></div>
+            </div>
+
+            <div class="refresh-info">🔄 Auto-refresh 4s | Uptime: <span id="serverUptime">0s</span></div>
+        </div>
+        <footer><p>⚡ NEXUS INFILTRATION ⚡ | Admin Dashboard</p></footer>
+    </div>
+
+    <script>
+        // NO SECRETS HARDCODED - Everything comes from server
+        
+        let sessionToken = null;
+        let adminKey = null;
+
+        async function login() {
+            const password = document.getElementById('adminPassword').value;
+            try {
+                const res = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password })
+                });
+                const data = await res.json();
+                
+                if (data.success) {
+                    sessionToken = data.token;
+                    adminKey = data.adminKey;
+                    sessionStorage.setItem('nexus_token', sessionToken);
+                    sessionStorage.setItem('nexus_key', adminKey);
+                    
+                    document.getElementById('loginScreen').classList.add('hidden');
+                    document.getElementById('mainDashboard').classList.remove('hidden');
+                    document.getElementById('loginError').style.display = 'none';
+                    
+                    fetchDashboard();
+                    setInterval(fetchDashboard, 4000);
+                } else {
+                    document.getElementById('loginError').style.display = 'block';
+                    document.getElementById('adminPassword').value = '';
+                }
+            } catch {
+                document.getElementById('loginError').textContent = '❌ Connection failed';
+                document.getElementById('loginError').style.display = 'block';
+            }
+        }
+
+        async function logout() {
+            if (sessionToken) {
+                await fetch('/api/admin/logout', {
+                    method: 'POST',
+                    headers: { 'x-session-token': sessionToken }
+                });
+            }
+            sessionStorage.clear();
+            location.reload();
+        }
+
+        // Auto-login
+        const savedToken = sessionStorage.getItem('nexus_token');
+        const savedKey = sessionStorage.getItem('nexus_key');
+        if (savedToken && savedKey) {
+            sessionToken = savedToken;
+            adminKey = savedKey;
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('mainDashboard').classList.remove('hidden');
+            fetchDashboard();
+            setInterval(fetchDashboard, 4000);
+        }
+
+        function formatDate(iso) {
+            if (!iso) return 'N/A';
+            return new Date(iso).toLocaleString();
+        }
+
+        async function fetchDashboard() {
+            try {
+                const res = await fetch('/api/dashboard', {
+                    headers: {
+                        'x-session-token': sessionToken || '',
+                        'x-admin-key': adminKey || ''
+                    }
+                });
+                
+                if (res.status === 403) { logout(); return; }
+                if (!res.ok) return;
+                
+                const data = await res.json();
+                const t = data.totals || {};
+                const si = data.serverInfo || {};
+
+                document.getElementById('totalRuns').textContent = t.runs || 0;
+                document.getElementById('uniqueSystems').textContent = t.uniqueHostnames || 0;
+                document.getElementById('totalInfected').textContent = t.totalFilesInfected || 0;
+                document.getElementById('totalEnv').textContent = t.totalEnvVarsExtracted || 0;
+                document.getElementById('kingCount').textContent = t.kingAchievements || 0;
+                
+                const uptime = si.uptime || 0;
+                document.getElementById('serverUptime').textContent = `${Math.floor(uptime/3600)}h ${Math.floor((uptime%3600)/60)}m ${uptime%60}s`;
+
+                if (data.latestRun) {
+                    const lr = data.latestRun;
+                    document.getElementById('latestRunContent').innerHTML = `
+                        <div class="latest-grid">
+                            <div class="latest-item"><div class="latest-label">Mission</div><div class="latest-value mono">${lr.missionId||'N/A'}</div></div>
+                            <div class="latest-item"><div class="latest-label">Hostname</div><div class="latest-value">${lr.hostname||'N/A'}</div></div>
+                            <div class="latest-item"><div class="latest-label">OS</div><div class="latest-value">${lr.os||'N/A'} (${lr.platform||''})</div></div>
+                            <div class="latest-item"><div class="latest-label">CPU</div><div class="latest-value" style="font-size:0.78em;">${(lr.cpu||'N/A').substring(0,35)}</div></div>
+                            <div class="latest-item"><div class="latest-label">Node.js</div><div class="latest-value">${lr.nodeVersion||'N/A'}</div></div>
+                            <div class="latest-item"><div class="latest-label">Threat</div><div class="latest-value threat-${lr.threatLevel||'LOW'}">${lr.threatLevel||'LOW'}</div></div>
+                            <div class="latest-item"><div class="latest-label">Files</div><div class="latest-value">${lr.filesInfected||0} / ${lr.filesScanned||0}</div></div>
+                            <div class="latest-item"><div class="latest-label">Env / Mutations</div><div class="latest-value">${lr.envVarsExtracted||0} / ${lr.mutations||0}</div></div>
+                        </div>`;
+                }
+
+                if (data.recentRuns?.length > 0) {
+                    document.getElementById('runsTableBody').innerHTML = data.recentRuns.map(r => `
+                        <tr>
+                            <td>${r.id}</td><td class="mono">${r.missionId}</td>
+                            <td style="font-size:0.75em;">${formatDate(r.timestamp)}</td>
+                            <td>${r.hostname}</td><td>${r.os}</td>
+                            <td style="font-size:0.72em;">${(r.cpu||'').substring(0,22)}</td>
+                            <td class="threat-${r.threatLevel||'LOW'}">${r.threatLevel||'LOW'}</td>
+                            <td>${r.filesInfected||0}</td><td>${r.envVarsExtracted||0}</td>
+                        </tr>`).join('');
+                }
+
+                if (data.distributions?.threatLevels) {
+                    const threats = data.distributions.threatLevels;
+                    const order = ['CRITICAL','HIGH','MEDIUM','LOW'];
+                    const colors = { CRITICAL:'#ff3333', HIGH:'#f59e0b', MEDIUM:'#00d4ff', LOW:'#00ff88' };
+                    const max = Math.max(...Object.values(threats), 1);
+                    document.getElementById('threatDist').innerHTML = order.filter(t=>threats[t]!==undefined).map(t=>`
+                        <div class="dist-item"><span class="dist-label threat-${t}">${t}</span><div class="dist-bar-container"><div class="dist-bar" style="width:${(threats[t]/max)*100}%;background:${colors[t]};"></div></div><span class="dist-count">${threats[t]}</span></div>`).join('');
+                }
+
+                if (data.distributions?.os) {
+                    const osData = data.distributions.os;
+                    const entries = Object.entries(osData).sort((a,b)=>b[1]-a[1]);
+                    const max = Math.max(...entries.map(([,v])=>v), 1);
+                    const colors = ['#00ff88','#00d4ff','#8b5cf6','#f59e0b','#ff3333'];
+                    document.getElementById('osDist').innerHTML = entries.length>0 ? entries.map(([os,c],i)=>`
+                        <div class="dist-item"><span class="dist-label">${os}</span><div class="dist-bar-container"><div class="dist-bar" style="width:${(c/max)*100}%;background:${colors[i%5]};"></div></div><span class="dist-count">${c}</span></div>`).join('') : '<div class="empty-state">No data</div>';
+                }
+            } catch(e) { console.error(e); }
+        }
+    </script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ NEXUS INFILTRATION - Live Dashboard | THUNDER HACKATHON 3.0</title>
+    <title>⚡ NEXUS INFILTRATION | THUNDER HACKATHON 3.0</title>
     <style>
         :root {
             --bg: #060912;
@@ -30,7 +30,6 @@
                 radial-gradient(ellipse at 80% 50%, rgba(0, 212, 255, 0.03) 0%, transparent 50%);
         }
 
-        /* Navigation */
         nav {
             background: var(--card);
             border-bottom: 2px solid var(--border);
@@ -40,9 +39,6 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 15px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
         }
 
         .nav-logo {
@@ -57,7 +53,6 @@
             display: flex;
             gap: 20px;
             list-style: none;
-            flex-wrap: wrap;
         }
 
         .nav-links a {
@@ -69,7 +64,6 @@
 
         .nav-links a:hover { color: var(--green); }
 
-        /* Hero */
         .hero {
             text-align: center;
             padding: 60px 20px 40px;
@@ -92,7 +86,7 @@
             margin: 0 auto 20px;
         }
 
-        .hero-badges {
+        .badge-row {
             display: flex;
             justify-content: center;
             gap: 12px;
@@ -107,32 +101,16 @@
             font-weight: 600;
         }
 
-        .badge-danger {
-            background: rgba(255,51,51,0.1);
-            border: 1px solid var(--red);
-            color: var(--red);
-        }
+        .badge-danger { background: rgba(255,51,51,0.1); border: 1px solid var(--red); color: var(--red); }
+        .badge-success { background: rgba(0,255,136,0.1); border: 1px solid var(--green); color: var(--green); }
+        .badge-info { background: rgba(0,212,255,0.1); border: 1px solid var(--cyan); color: var(--cyan); }
 
-        .badge-success {
-            background: rgba(0,255,136,0.1);
-            border: 1px solid var(--green);
-            color: var(--green);
-        }
-
-        .badge-info {
-            background: rgba(0,212,255,0.1);
-            border: 1px solid var(--cyan);
-            color: var(--cyan);
-        }
-
-        /* Container */
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 20px;
         }
 
-        /* Action Buttons */
         .action-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -147,7 +125,6 @@
             padding: 24px;
             text-align: center;
             transition: all 0.3s;
-            cursor: pointer;
             text-decoration: none;
             color: var(--text);
         }
@@ -158,35 +135,14 @@
             box-shadow: 0 8px 30px rgba(0,255,136,0.1);
         }
 
-        .action-card .icon {
-            font-size: 2.5em;
-            margin-bottom: 12px;
-        }
+        .action-card .icon { font-size: 2.5em; margin-bottom: 12px; }
+        .action-card h3 { font-size: 1.1em; margin-bottom: 6px; }
+        .action-card p { color: var(--gray); font-size: 0.82em; }
 
-        .action-card h3 {
-            font-size: 1.1em;
-            margin-bottom: 6px;
-            color: var(--text);
-        }
+        .action-card.download { border-left: 3px solid var(--green); }
+        .action-card.clone { border-left: 3px solid var(--cyan); }
+        .action-card.github { border-left: 3px solid var(--purple); }
 
-        .action-card p {
-            color: var(--gray);
-            font-size: 0.82em;
-        }
-
-        .action-card.download {
-            border-left: 3px solid var(--green);
-        }
-
-        .action-card.clone {
-            border-left: 3px solid var(--cyan);
-        }
-
-        .action-card.view {
-            border-left: 3px solid var(--purple);
-        }
-
-        /* Steps Section */
         .section {
             margin-bottom: 30px;
         }
@@ -195,7 +151,6 @@
             font-size: 1.4em;
             font-weight: 700;
             margin-bottom: 16px;
-            color: var(--text);
             display: flex;
             align-items: center;
             gap: 10px;
@@ -213,7 +168,6 @@
             padding: 18px 20px;
             display: flex;
             gap: 16px;
-            align-items: flex-start;
         }
 
         .step-number {
@@ -225,13 +179,11 @@
             align-items: center;
             justify-content: center;
             font-weight: 800;
-            font-size: 1em;
             color: #000;
             flex-shrink: 0;
         }
 
         .step-content h4 {
-            color: var(--text);
             margin-bottom: 4px;
         }
 
@@ -246,11 +198,10 @@
             border: 1px solid var(--border);
             border-radius: 6px;
             padding: 12px 16px;
-            font-family: 'Courier New', 'Consolas', monospace;
+            font-family: 'Courier New', monospace;
             font-size: 0.85em;
             color: var(--green);
             position: relative;
-            margin-top: 8px;
         }
 
         .code-box .copy-btn {
@@ -267,15 +218,39 @@
             font-family: 'Segoe UI', sans-serif;
         }
 
-        .code-box .copy-btn:hover {
-            color: var(--green);
-            background: #2a2a40;
-        }
-
+        .code-box .copy-btn:hover { color: var(--green); }
         .code-box .comment { color: #6a737d; }
         .code-box .keyword { color: #ff7b72; }
 
-        /* Expected Output */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 14px;
+        }
+
+        .feature-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px;
+            border-left: 3px solid var(--green);
+        }
+
+        .feature-card h4 { margin-bottom: 4px; }
+        .feature-card p { color: var(--gray); font-size: 0.85em; }
+
+        .privacy-notice {
+            background: rgba(255,51,51,0.05);
+            border: 1px solid var(--red);
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin: 20px 0;
+            font-size: 0.85em;
+            color: var(--gray);
+        }
+
+        .privacy-notice strong { color: var(--red); }
+
         .output-preview {
             background: #060810;
             border: 1px solid var(--border);
@@ -285,102 +260,15 @@
             font-size: 0.78em;
             line-height: 1.6;
             color: var(--green);
-            max-height: 300px;
+            max-height: 250px;
             overflow-y: auto;
             margin-top: 8px;
         }
 
-        .output-preview .red { color: var(--red); }
-        .output-preview .yellow { color: var(--yellow); }
         .output-preview .cyan { color: var(--cyan); }
+        .output-preview .yellow { color: var(--yellow); }
         .output-preview .gray { color: var(--gray); }
 
-        /* Live Stats */
-        .stats-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-
-        .stat-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 16px;
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2em;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--green), var(--cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .stat-label {
-            color: var(--gray);
-            font-size: 0.75em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Panel */
-        .panel {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .panel-title {
-            font-size: 1.1em;
-            font-weight: 700;
-            margin-bottom: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* Table */
-        .table-container { overflow-x: auto; }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.8em;
-        }
-
-        th {
-            text-align: left;
-            color: var(--gray);
-            padding: 10px;
-            border-bottom: 2px solid var(--border);
-            font-size: 0.75em;
-            text-transform: uppercase;
-            white-space: nowrap;
-        }
-
-        td {
-            padding: 8px 10px;
-            border-bottom: 1px solid rgba(26,26,46,0.6);
-            white-space: nowrap;
-        }
-
-        .threat-CRITICAL { color: var(--red); font-weight: 700; }
-        .threat-HIGH { color: var(--yellow); font-weight: 600; }
-        .threat-MEDIUM { color: var(--cyan); }
-        .threat-LOW { color: var(--green); }
-
-        .mono {
-            font-family: 'Courier New', monospace;
-            font-size: 0.8em;
-            color: var(--green);
-        }
-
-        /* Footer */
         footer {
             text-align: center;
             padding: 30px;
@@ -390,20 +278,8 @@
             margin-top: 20px;
         }
 
-        footer a {
-            color: var(--green);
-            text-decoration: none;
-        }
+        footer a { color: var(--green); text-decoration: none; }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 1.8em; }
-            .nav-links { gap: 10px; }
-            .nav-links a { font-size: 0.75em; }
-            .action-grid { grid-template-columns: 1fr; }
-        }
-
-        /* Toast notification */
         .toast {
             position: fixed;
             bottom: 20px;
@@ -427,19 +303,9 @@
             to { opacity: 0; }
         }
 
-        /* Live dot */
-        .live-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--green);
-            display: inline-block;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(0,255,136,0.4); }
-            50% { box-shadow: 0 0 0 8px rgba(0,255,136,0); }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8em; }
+            .action-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -449,9 +315,9 @@
         <div class="nav-logo">⚡ NEXUS INFILTRATION</div>
         <ul class="nav-links">
             <li><a href="#get-started">Get Started</a></li>
-            <li><a href="#steps">Steps</a></li>
-            <li><a href="#live-data">Live Data</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
             <li><a href="#features">Features</a></li>
+            <li><a href="https://github.com/YOUR_USERNAME/nexus-infiltration" target="_blank">GitHub</a></li>
         </ul>
     </nav>
 
@@ -462,61 +328,56 @@
             Advanced System Infiltration & Code Manipulation Tool<br>
             <strong>THUNDER HACKATHON 3.0</strong>
         </p>
-        <div class="hero-badges">
-            <span class="badge badge-danger">🔴 THREAT LEVEL: CRITICAL</span>
+        <div class="badge-row">
+            <span class="badge badge-danger">🔴 ADVANCED SYSTEM TOOL</span>
             <span class="badge badge-success">✅ SAFE & REVERSIBLE</span>
-            <span class="badge badge-info"><span class="live-dot"></span> LIVE DASHBOARD</span>
+            <span class="badge badge-info">📊 PRIVATE DASHBOARD</span>
         </div>
     </div>
 
-    <!-- Main Container -->
     <div class="container">
         
-        <!-- ═══════════════════════════════════════════ -->
-        <!-- ACTION BUTTONS -->
-        <!-- ═══════════════════════════════════════════ -->
+        <!-- Privacy Notice -->
+        <div class="privacy-notice">
+            <strong>🔒 PRIVACY NOTICE:</strong> All data extracted by this tool stays <strong>ON YOUR SYSTEM</strong>. 
+            The tool only sends anonymized operation statistics (file counts, OS type) to the dashboard. 
+            No personal data, environment variables, or file contents are ever transmitted.
+        </div>
+
+        <!-- Action Buttons -->
         <div class="section" id="get-started">
             <h2 class="section-title">🚀 Get Started</h2>
             <div class="action-grid">
-                <!-- Download -->
                 <a href="https://github.com/YOUR_USERNAME/nexus-infiltration/raw/main/nexus.js" 
                    class="action-card download" download>
                     <div class="icon">⬇️</div>
                     <h3>Download nexus.js</h3>
                     <p>Download the tool directly. Just run: node nexus.js</p>
                 </a>
-
-                <!-- Clone -->
                 <a href="https://github.com/YOUR_USERNAME/nexus-infiltration" 
                    class="action-card clone" target="_blank">
                     <div class="icon">📂</div>
                     <h3>Clone Repository</h3>
-                    <p>git clone and get the complete project with all files</p>
+                    <p>Get the complete project with all files</p>
                 </a>
-
-                <!-- View on GitHub -->
                 <a href="https://github.com/YOUR_USERNAME/nexus-infiltration" 
-                   class="action-card view" target="_blank">
+                   class="action-card github" target="_blank">
                     <div class="icon">🔗</div>
                     <h3>View on GitHub</h3>
-                    <p>Browse source code, README, and documentation</p>
+                    <p>Browse source code and documentation</p>
                 </a>
             </div>
         </div>
 
-        <!-- ═══════════════════════════════════════════ -->
-        <!-- STEP-BY-STEP GUIDE -->
-        <!-- ═══════════════════════════════════════════ -->
-        <div class="section" id="steps">
+        <!-- Steps -->
+        <div class="section" id="how-it-works">
             <h2 class="section-title">📋 How to Run</h2>
             <div class="step-list">
-                
-                <!-- Step 1 -->
                 <div class="step-item">
                     <div class="step-number">1</div>
                     <div class="step-content">
-                        <h4>Download or Clone the Project</h4>
-                        <p>Choose one of the options above. Either download nexus.js directly or clone the full repository.</p>
+                        <h4>Download the Tool</h4>
+                        <p>Click the download button above or clone the repository.</p>
                         <div class="code-box">
                             <button class="copy-btn" onclick="copyCode(this, 'git clone https://github.com/YOUR_USERNAME/nexus-infiltration.git\ncd nexus-infiltration')">📋 Copy</button>
                             <span class="comment"># Clone the repository</span><br>
@@ -525,208 +386,89 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Step 2 -->
                 <div class="step-item">
                     <div class="step-number">2</div>
                     <div class="step-content">
                         <h4>Run the Tool</h4>
-                        <p>Execute nexus.js with Node.js. You'll see an interactive menu with 7 options.</p>
+                        <p>Execute with Node.js. Choose from 7 operation modes.</p>
                         <div class="code-box">
                             <button class="copy-btn" onclick="copyCode(this, 'node nexus.js')">📋 Copy</button>
-                            <span class="comment"># Full mode (recommended)</span><br>
+                            <span class="comment"># Full operation (recommended)</span><br>
                             <span class="keyword">node</span> nexus.js<br><br>
                             <span class="comment"># Safe mode (masks sensitive data)</span><br>
-                            <span class="keyword">node</span> nexus.js --safe<br><br>
-                            <span class="comment"># Audit only (no file changes)</span><br>
-                            <span class="keyword">node</span> nexus.js --audit
+                            <span class="keyword">node</span> nexus.js --safe
                         </div>
                     </div>
                 </div>
-
-                <!-- Step 3 -->
                 <div class="step-item">
                     <div class="step-number">3</div>
                     <div class="step-content">
-                        <h4>Select Operation Mode</h4>
-                        <p>Press <strong>1</strong> for FULL OPERATION to see everything: system info extraction, CRUD operations, multi-directory scanning, polymorphic infection, and automatic cleanup.</p>
-                        <div class="output-preview">
-<span class="cyan">╔══════════════════════════════════════════════════════════════════╗</span>
-<span class="cyan">║     ⚡⚡⚡  NEXUS INFILTRATION  ⚡⚡⚡                            ║</span>
-<span class="cyan">╚══════════════════════════════════════════════════════════════════╝</span>
-
-<span class="yellow">  ⚠️  WARNING: This tool MODIFIES files (with backups)!</span>
-
-  SELECT MODE:
-
-  <span class="green">1. 🚀 FULL OPERATION  - Complete infiltration + cleanup</span>
-  2. 🔍 AUDIT ONLY      - Scan without infection
-  3. 🥷 STEALTH MODE    - Silent, minimal output
-  4. 🧹 CLEANUP ONLY     - Restore all files
-  5. 📊 SYSTEM INFO     - Extract info only
-  6. 📝 CRUD ONLY       - CRUD operations only
-  7. ❌ EXIT
-
-  Choice (1-7): <span class="yellow">1</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Step 4 -->
-                <div class="step-item">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h4>Watch the Operation Unfold</h4>
-                        <p>The tool will automatically run through all 4 phases. Here's what you'll see:</p>
+                        <h4>Watch It Work</h4>
+                        <p>The tool automatically runs through all 4 phases:</p>
                         <div class="output-preview">
 <span class="cyan">🕵️ PHASE 1: SYSTEM INFILTRATION</span>
-<span class="green">✅ Extraction complete in 0.45s</span>
-   <span class="gray">🏠 Hostname: YOUR-PC-NAME</span>
-   <span class="gray">💻 OS: Windows_NT 10.0.22621</span>
-   <span class="gray">🧠 CPU: Intel(R) Core(TM) i7-12700H</span>
-   <span class="gray">💾 RAM: 10.48 GB / 15.71 GB</span>
-   <span class="gray">🔑 Env Vars: 47 found in 12 categories</span>
+<span class="gray">✅ Extracts OS, CPU, RAM, Hostname, Node.js, Env Variables</span>
 
 <span class="cyan">📝 CRUD OPERATIONS</span>
-<span class="green">✅ CREATE: nexus_crud_test.js (256 bytes)</span>
-<span class="green">✅ READ: 15 lines, 256 bytes</span>
-<span class="green">✅ UPDATE: 256 → 412 bytes</span>
-<span class="green">✅ DELETE: File removed</span>
+<span class="gray">✅ CREATE → READ → UPDATE → LIST → DELETE on real files</span>
 
 <span class="cyan">🔍 PHASE 2: MULTI-DIRECTORY RECONNAISSANCE</span>
-   <span class="gray">🌍 Scanning 5 directories...</span>
-<span class="green">✅ Scanned 234 files, 12 high-value targets</span>
+<span class="gray">✅ Scans Desktop, Documents, Projects, Home directory</span>
 
 <span class="cyan">🦠 PHASE 3: POLYMORPHIC INFECTION</span>
-   <span class="yellow">🎯 Infecting auth.js ✓ [Obfuscated] [MUT-A1B2C3]</span>
-   <span class="yellow">🎯 Infecting config.json ✓ [Encoded] [MUT-D4E5F6]</span>
-<span class="green">✅ Infected: 42 | Mutations: 7 unique</span>
+<span class="gray">✅ 7 unique mutation strategies, automatic backups</span>
 
-<span class="cyan">💊 PHASE 4: ANTIDOTE - RESTORING</span>
-<span class="green">✅ All files restored, zero residual infection</span>
-
-<span class="yellow">🏆 ACHIEVEMENTS UNLOCKED: 8/12</span>
+<span class="cyan">💊 PHASE 4: ANTIDOTE & CLEANUP</span>
+<span class="gray">✅ All files restored, zero traces, achievement unlocks</span>
                         </div>
                     </div>
                 </div>
-
-                <!-- Step 5 -->
-                <div class="step-item">
-                    <div class="step-number">5</div>
-                    <div class="step-content">
-                        <h4>Check the Live Dashboard</h4>
-                        <p>After running the tool, refresh this page! Your operation data will appear in the live stats below, showing that the tool successfully reported back.</p>
-                        <p style="color: var(--green);">👇 Scroll down to see live data from all operations!</p>
-                    </div>
-                </div>
             </div>
         </div>
 
-        <!-- ═══════════════════════════════════════════ -->
-        <!-- LIVE DATA SECTION -->
-        <!-- ═══════════════════════════════════════════ -->
-        <div class="section" id="live-data">
-            <h2 class="section-title">
-                <span class="live-dot"></span> Live Operation Data
-                <span style="font-size:0.7em;color:var(--gray);font-weight:400;">(auto-updates every 4s)</span>
-            </h2>
-
-            <!-- Stats -->
-            <div class="stats-row">
-                <div class="stat-card">
-                    <div class="stat-number" id="totalRuns">0</div>
-                    <div class="stat-label">Total Operations</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="uniqueSystems">0</div>
-                    <div class="stat-label">Unique Systems</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="totalInfected">0</div>
-                    <div class="stat-label">Files Infected</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="totalEnv">0</div>
-                    <div class="stat-label">Env Vars Extracted</div>
-                </div>
-            </div>
-
-            <!-- Latest Run -->
-            <div class="panel">
-                <div class="panel-title">🕵️ Latest Operation Details</div>
-                <div id="latestRunContent">
-                    <p style="color:var(--gray);text-align:center;padding:20px;">
-                        ⏳ Waiting for first operation...<br>
-                        <span style="font-size:0.85em;">Run nexus.js to see data appear here</span>
-                    </p>
-                </div>
-            </div>
-
-            <!-- Recent Runs -->
-            <div class="panel">
-                <div class="panel-title">📊 Recent Operations</div>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Mission ID</th>
-                                <th>Time</th>
-                                <th>Hostname</th>
-                                <th>OS</th>
-                                <th>CPU</th>
-                                <th>Threat</th>
-                                <th>Infected</th>
-                            </tr>
-                        </thead>
-                        <tbody id="runsTableBody">
-                            <tr>
-                                <td colspan="8" style="text-align:center;color:var(--gray);padding:20px;">
-                                    No operations recorded yet
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- ═══════════════════════════════════════════ -->
-        <!-- FEATURES -->
-        <!-- ═══════════════════════════════════════════ -->
+        <!-- Features -->
         <div class="section" id="features">
-            <h2 class="section-title">🛠️ Tool Capabilities</h2>
-            <div class="action-grid">
-                <div class="action-card" style="cursor:default;border-left:3px solid var(--green);">
-                    <div class="icon">🕵️</div>
-                    <h3>System Info Extraction</h3>
-                    <p>OS, CPU, RAM, Hostname, Node.js, User details + ALL environment variables in 12 categories</p>
+            <h2 class="section-title">🛠️ Capabilities</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>🕵️ System Information Extraction</h4>
+                    <p>OS details, CPU architecture, hostname, Node.js version, platform info, user home directory, ALL environment variables in 12 categories</p>
                 </div>
-                <div class="action-card" style="cursor:default;border-left:3px solid var(--cyan);">
-                    <div class="icon">📝</div>
-                    <h3>CRUD Operations</h3>
-                    <p>Real CREATE, READ, UPDATE, DELETE on code files with full operation logging</p>
+                <div class="feature-card">
+                    <h4>📝 CRUD Operations</h4>
+                    <p>Real CREATE, READ, UPDATE, LIST, DELETE operations on code files with full operation logging</p>
                 </div>
-                <div class="action-card" style="cursor:default;border-left:3px solid var(--purple);">
-                    <div class="icon">🔍</div>
-                    <h3>Multi-Directory Scan</h3>
-                    <p>Scans beyond current folder - Desktop, Documents, Projects, Home directory</p>
+                <div class="feature-card">
+                    <h4>🔍 Multi-Directory Scanning</h4>
+                    <p>Scans beyond current folder - Desktop, Documents, Projects, and Home directory for high-value targets</p>
                 </div>
-                <div class="action-card" style="cursor:default;border-left:3px solid var(--yellow);">
-                    <div class="icon">🦠</div>
-                    <h3>Polymorphic Engine</h3>
-                    <p>7 unique mutation strategies - each file gets a different infection pattern</p>
+                <div class="feature-card">
+                    <h4>🦠 Polymorphic Engine</h4>
+                    <p>7 unique mutation strategies - each file gets a different infection pattern with automatic backups</p>
                 </div>
-                <div class="action-card" style="cursor:default;border-left:3px solid var(--green);">
-                    <div class="icon">💊</div>
-                    <h3>Auto Backup & Restore</h3>
-                    <p>Backups before every modification. Complete restoration with verification</p>
+                <div class="feature-card">
+                    <h4>💊 Safe Restore</h4>
+                    <p>Automatic backups before every modification. Complete restoration with verification</p>
                 </div>
-                <div class="action-card" style="cursor:default;border-left:3px solid var(--red);">
-                    <div class="icon">🏆</div>
-                    <h3>Achievement System</h3>
-                    <p>12 unlockable achievements tracked across all operations</p>
+                <div class="feature-card">
+                    <h4>🏆 Achievement System</h4>
+                    <p>12 unlockable achievements tracked across operations</p>
                 </div>
+            </div>
+        </div>
+
+        <!-- Hackathon Info -->
+        <div class="section">
+            <h2 class="section-title">🏆 Hackathon Objectives</h2>
+            <div class="feature-grid">
+                <div class="feature-card"><h4>✅ OS Details</h4><p>Type, platform, release, version, architecture</p></div>
+                <div class="feature-card"><h4>✅ CPU Architecture</h4><p>Model, cores, speed, load average</p></div>
+                <div class="feature-card"><h4>✅ Hostname</h4><p>Complete system hostname</p></div>
+                <div class="feature-card"><h4>✅ Node.js Version</h4><p>Runtime, V8, dependencies</p></div>
+                <div class="feature-card"><h4>✅ Platform Info</h4><p>Memory, uptime, network interfaces</p></div>
+                <div class="feature-card"><h4>✅ Home Directory</h4><p>Username, home path, shell</p></div>
+                <div class="feature-card"><h4>✅ Environment Variables</h4><p>ALL variables, 12 categories</p></div>
+                <div class="feature-card"><h4>✅ CRUD Operations</h4><p>Create, Read, Update, Delete on code files</p></div>
             </div>
         </div>
     </div>
@@ -735,120 +477,29 @@
     <footer>
         <p>⚡ <strong>NEXUS INFILTRATION</strong> ⚡ | Built for <strong>THUNDER HACKATHON 3.0</strong></p>
         <p style="margin-top:6px;">
-            <a href="https://github.com/YOUR_USERNAME/nexus-infiltration" target="_blank">GitHub Repository</a> •
-            <a href="/api/health" target="_blank">API Health</a> •
-            <a href="/api/dashboard" target="_blank">API Data</a>
+            <a href="https://github.com/YOUR_USERNAME/nexus-infiltration" target="_blank">GitHub</a> •
+            <span style="color:var(--gray);">All data stays local</span>
         </p>
-        <p style="margin-top:4px;font-size:0.75em;">All operations are safe & reversible | Backups created automatically</p>
     </footer>
 
     <script>
-        // ═══════════════════════════════════════════════════
-        // COPY CODE FUNCTION
-        // ═══════════════════════════════════════════════════
-
         function copyCode(btn, code) {
             navigator.clipboard.writeText(code).then(() => {
-                const originalText = btn.textContent;
                 btn.textContent = '✅ Copied!';
                 btn.style.color = '#00ff88';
-                setTimeout(() => {
-                    btn.textContent = originalText;
-                    btn.style.color = '';
-                }, 2000);
-                
-                // Show toast
+                setTimeout(() => { btn.textContent = '📋 Copy'; btn.style.color = ''; }, 2000);
                 const toast = document.createElement('div');
                 toast.className = 'toast';
-                toast.textContent = '✅ Command copied to clipboard!';
+                toast.textContent = '✅ Copied to clipboard!';
                 document.body.appendChild(toast);
                 setTimeout(() => toast.remove(), 2300);
             });
         }
 
-        // ═══════════════════════════════════════════════════
-        // LIVE DATA FETCHING
-        // ═══════════════════════════════════════════════════
-
-        const API_URL = '/api/dashboard';
-        let previousRuns = 0;
-
-        function formatDate(isoString) {
-            if (!isoString) return 'N/A';
-            return new Date(isoString).toLocaleString();
-        }
-
-        async function fetchDashboard() {
-            try {
-                const response = await fetch(API_URL);
-                const data = await response.json();
-                const totals = data.totals || {};
-
-                // Update stats
-                document.getElementById('totalRuns').textContent = totals.runs || 0;
-                document.getElementById('uniqueSystems').textContent = totals.uniqueHostnames || 0;
-                document.getElementById('totalInfected').textContent = totals.totalFilesInfected || 0;
-                document.getElementById('totalEnv').textContent = totals.totalEnvVarsExtracted || 0;
-
-                // Update latest run
-                if (data.latestRun) {
-                    const lr = data.latestRun;
-                    document.getElementById('latestRunContent').innerHTML = `
-                        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
-                            <div><strong style="color:var(--gray);">Mission ID:</strong><br><span class="mono">${lr.missionId || 'N/A'}</span></div>
-                            <div><strong style="color:var(--gray);">Hostname:</strong><br>${lr.hostname || 'N/A'}</div>
-                            <div><strong style="color:var(--gray);">OS:</strong><br>${lr.os || 'N/A'} (${lr.platform || ''})</div>
-                            <div><strong style="color:var(--gray);">CPU:</strong><br>${(lr.cpu || 'N/A').substring(0, 35)}</div>
-                            <div><strong style="color:var(--gray);">RAM Usage:</strong><br>${lr.ramUsage || 'N/A'}</div>
-                            <div><strong style="color:var(--gray);">Threat Level:</strong><br><span class="threat-${lr.threatLevel || 'LOW'}">${lr.threatLevel || 'LOW'}</span></div>
-                            <div><strong style="color:var(--gray);">Files Infected:</strong><br>${lr.filesInfected || 0}</div>
-                            <div><strong style="color:var(--gray);">Env Vars:</strong><br>${lr.envVarsExtracted || 0}</div>
-                        </div>
-                    `;
-                }
-
-                // Update table
-                if (data.recentRuns && data.recentRuns.length > 0) {
-                    const tbody = document.getElementById('runsTableBody');
-                    tbody.innerHTML = data.recentRuns.map(run => `
-                        <tr>
-                            <td>${run.id || '-'}</td>
-                            <td class="mono">${run.missionId || 'N/A'}</td>
-                            <td style="font-size:0.8em;">${formatDate(run.timestamp)}</td>
-                            <td>${run.hostname || 'N/A'}</td>
-                            <td>${run.os || 'N/A'}</td>
-                            <td style="font-size:0.75em;">${(run.cpu || 'N/A').substring(0, 20)}</td>
-                            <td class="threat-${run.threatLevel || 'LOW'}">${run.threatLevel || 'LOW'}</td>
-                            <td>${run.filesInfected || 0}</td>
-                        </tr>
-                    `).join('');
-                }
-
-                // Track new runs
-                if (totals.runs > previousRuns && previousRuns > 0) {
-                    const toast = document.createElement('div');
-                    toast.className = 'toast';
-                    toast.textContent = `📥 New operation detected! Total: ${totals.runs}`;
-                    document.body.appendChild(toast);
-                    setTimeout(() => toast.remove(), 2500);
-                }
-                previousRuns = totals.runs;
-
-            } catch (error) {
-                console.log('Waiting for server...');
-            }
-        }
-
-        // Fetch immediately and every 4 seconds
-        fetchDashboard();
-        setInterval(fetchDashboard, 4000);
-
-        // Smooth scroll for nav links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', function(e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
             });
         });
     </script>
