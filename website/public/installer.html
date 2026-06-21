@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ NEXUS - One Click Installer</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .installer-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .install-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        
+        .install-card h2 {
+            margin-bottom: 16px;
+            font-size: 1.8rem;
+        }
+        
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+        
+        .platform-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 24px;
+            background: var(--bg-primary);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+        
+        .platform-btn:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: var(--glow);
+        }
+        
+        .platform-btn .icon {
+            font-size: 3rem;
+            margin-bottom: 12px;
+        }
+        
+        .platform-btn .name {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .platform-btn .desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        
+        .steps {
+            text-align: left;
+            margin: 24px 0;
+        }
+        
+        .steps li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(30, 41, 59, 0.3);
+        }
+        
+        .code-block {
+            background: #0a0e1a;
+            border-radius: 8px;
+            padding: 16px;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 16px 0;
+        }
+        
+        .info-box {
+            background: rgba(0, 240, 255, 0.05);
+            border-left: 3px solid var(--primary);
+            padding: 16px;
+            border-radius: 4px;
+            margin: 16px 0;
+        }
+        
+        .info-box.success {
+            border-color: var(--accent-green);
+            background: rgba(0, 255, 65, 0.05);
+        }
+        
+        .info-box.warning {
+            border-color: var(--accent-yellow);
+            background: rgba(251, 191, 36, 0.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="installer-container">
+        <div class="install-card">
+            <div style="font-size: 4rem;">⚡</div>
+            <h2>One Click Installer</h2>
+            <p style="color: var(--text-secondary);">Download and run NEXUS in one click</p>
+            
+            <div class="info-box success">
+                ✅ <strong>All sensitive data is automatically masked</strong><br>
+                No passwords, keys, or tokens are exposed
+            </div>
+            
+            <div class="platform-grid">
+                <a href="/download/run-windows.bat" class="platform-btn" download>
+                    <span class="icon">🪟</span>
+                    <span class="name">Windows</span>
+                    <span class="desc">Download .bat file</span>
+                </a>
+                <a href="/download/run-mac.sh" class="platform-btn" download>
+                    <span class="icon">🍎</span>
+                    <span class="name">macOS</span>
+                    <span class="desc">Download .sh file</span>
+                </a>
+                <a href="/download/run-linux.sh" class="platform-btn" download>
+                    <span class="icon">🐧</span>
+                    <span class="name">Linux</span>
+                    <span class="desc">Download .sh file</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="install-card">
+            <h3>📋 How to Use</h3>
+            <ol class="steps">
+                <li><strong>Download</strong> the installer for your operating system</li>
+                <li><strong>Double-click</strong> the downloaded file</li>
+                <li><strong>Click "Continue"</strong> when prompted</li>
+                <li><strong>Watch</strong> as NEXUS collects your system data</li>
+                <li><strong>Done!</strong> Your data is sent to the server</li>
+            </ol>
+        </div>
+        
+        <div class="install-card">
+            <h3>🔄 Alternative: Manual Run</h3>
+            <p style="color: var(--text-secondary);">If you prefer to run manually:</p>
+            <div class="code-block">
+                <span style="color: var(--accent-green);">$</span> git clone https://github.com/yourusername/thunder-hackathon-3.0<br>
+                <span style="color: var(--accent-green);">$</span> cd thunder-hackathon-3.0/nexus-tool<br>
+                <span style="color: var(--accent-green);">$</span> node nexus.js --server https://your-server.com/api/collect
+            </div>
+        </div>
+        
+        <div class="install-card">
+            <h3>🔐 Privacy Promise</h3>
+            <div class="info-box warning">
+                ✅ <strong>We only collect:</strong><br>
+                • Operating system info<br>
+                • Hardware specifications<br>
+                • Environment variables (all sensitive data masked)<br>
+                • File structure (no file contents)<br>
+                <br>
+                ❌ <strong>We DO NOT collect:</strong><br>
+                • Passwords or credentials<br>
+                • Personal files or documents<br>
+                • Browser history or cookies<br>
+                • Any personal identification
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Track downloads
+        document.querySelectorAll('.platform-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const platform = btn.querySelector('.name').textContent;
+                console.log(`📥 Download: ${platform}`);
+                // You can add analytics here
+            });
+        });
+    </script>
+</body>
+</html>

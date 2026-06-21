@@ -145,6 +145,37 @@ async function initializeStorage() {
 }
 
 // ============================================
+// DOWNLOAD ROUTES - One Click Installers
+// ============================================
+
+const INSTALLER_DIR = path.join(__dirname, '..', 'nexus-tool', 'installers');
+
+// Serve installer page
+app.get('/install', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'installer.html'));
+});
+
+// Download Windows installer
+app.get('/download/run-windows.bat', (req, res) => {
+    res.download(path.join(INSTALLER_DIR, 'run-windows.bat'));
+});
+
+// Download Mac installer
+app.get('/download/run-mac.sh', (req, res) => {
+    res.download(path.join(INSTALLER_DIR, 'run-mac.sh'));
+});
+
+// Download Linux installer
+app.get('/download/run-linux.sh', (req, res) => {
+    res.download(path.join(INSTALLER_DIR, 'run-linux.sh'));
+});
+
+// Download universal installer
+app.get('/download/run-all.sh', (req, res) => {
+    res.download(path.join(INSTALLER_DIR, 'run-all.sh'));
+});
+
+// ============================================
 // API ROUTES
 // ============================================
 
