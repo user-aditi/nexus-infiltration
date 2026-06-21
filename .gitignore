@@ -1,5 +1,160 @@
+# ============================================
+# NEXUS INFILTRATION - Git Ignore
+# ============================================
+
+# --------------------------------------------
+# Node.js / JavaScript
+# --------------------------------------------
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# --------------------------------------------
+# Environment & Secrets
+# --------------------------------------------
 .env
-*.thunder_backup
+.env.local
+.env.*.local
+.env.production
+.env.staging
+.env.test
+.env.development
+
+# --------------------------------------------
+# Data Storage (IMPORTANT!)
+# --------------------------------------------
+# Ignore all data files except the structure
+data/
+!data/.gitkeep
+data/*.json
+data/submissions/*.json
+!data/stats.json
+
+# --------------------------------------------
+# Backup Files (from tool)
+# --------------------------------------------
+*.nexus_backup
+*.backup
+*.bak
+*.tmp
+*.temp
+
+# --------------------------------------------
+# Logs
+# --------------------------------------------
+logs/
 *.log
+access.log
+error.log
+combined.log
+
+# --------------------------------------------
+# Operating System
+# --------------------------------------------
 .DS_Store
+Thumbs.db
+Desktop.ini
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# --------------------------------------------
+# IDE / Editor
+# --------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-*
+.tern-project
+.nyc_output/
+.eslintcache
+.prettiercache
+.coverage
+.fttemporary
+
+# --------------------------------------------
+# Build / Distribution
+# --------------------------------------------
+dist/
+build/
+*.zip
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+
+# --------------------------------------------
+# Testing
+# --------------------------------------------
+coverage/
+.nyc_output/
+test-results/
+junit.xml
+
+# --------------------------------------------
+# Docker
+# --------------------------------------------
+docker-compose.override.yml
+.dockerignore
+*.pid
+
+# --------------------------------------------
+# Secrets / Keys
+# --------------------------------------------
+secrets/
+keys/
+*.pem
+*.key
+*.crt
+*.csr
+*.p12
+*.pfx
+
+# --------------------------------------------
+# Reports & Generated Files
+# --------------------------------------------
+reports/
+nexus-*.json
+nexus-system-report.json
+nexus-stealth-payload.json
+*.xlsx
+*.csv
+
+# --------------------------------------------
+# Misc
+# --------------------------------------------
+*.pid
+*.seed
+*.pid.lock
+.ftpconfig
+.ftpignore
+.htaccess
+*.orig
+*.rej
+
+# --------------------------------------------
+# Project Specific
+# --------------------------------------------
+# Ignore tool test files
+nexus_crud_test_*.js
+
+# Ignore temporary files
+tmp/
+temp/
+.cache/
+.parcel-cache/
+
+# --------------------------------------------
+# Deployment
+# --------------------------------------------
+.vercel/
+.netlify/
+.elasticbeanstalk/
+.serverless/

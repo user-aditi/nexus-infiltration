@@ -1,0 +1,28 @@
+{
+  "name": "nexus-infiltration",
+  "version": "1.0.0",
+  "description": "Advanced System Information & Code Manipulation Tool for Thunder Hackathon 3.0",
+  "main": "nexus.js",
+  "bin": {
+    "nexus": "./nexus.js"
+  },
+  "scripts": {
+    "start": "node nexus.js",
+    "dev": "node nexus.js --no-interactive",
+    "safe": "node nexus.js --safe",
+    "stealth": "node nexus.js --stealth",
+    "audit": "node nexus.js --audit"
+  },
+  "keywords": [
+    "hackathon",
+    "system-info",
+    "crud",
+    "security",
+    "nodejs"
+  ],
+  "author": "Team Nexus",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
