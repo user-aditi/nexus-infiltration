@@ -3,283 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ NEXUS - Thunder Hackathon 3.0</title>
+    <title>NEXUS Infiltration Tool</title>
+    <!-- Google Fonts: Inter and JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Top Navbar -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <span class="logo-icon">⚡</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logo-icon"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
                 <span class="logo-text">NEXUS</span>
             </div>
             <div class="nav-links">
-                <a href="#features">Features</a>
-                <a href="#demo">Demo</a>
-                <a href="#download" class="nav-download">Download</a>
+                <a href="https://github.com/user-aditi/nexus-infiltration" target="_blank">GitHub</a>
+                <span class="divider"></span>
+                <a href="admin.html" class="nav-link-secondary">Admin Panel</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <span>🏆 Thunder Hackathon 3.0</span>
-                </div>
-                <h1 class="hero-title">
-                    <span class="title-gradient">NEXUS</span>
-                    <span>Infiltration</span>
-                </h1>
-                <p class="hero-subtitle">
-                    Advanced System Information & Code Manipulation Tool
-                </p>
-                <p class="hero-description">
-                    Collect system data, perform CRUD operations, and 
-                    analyze security posture with our polymorphic engine.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#download" class="btn btn-primary">
-                        <span>⬇️</span> Download Tool
-                    </a>
-                    <a href="#demo" class="btn btn-secondary">
-                        <span>▶️</span> View Demo
-                    </a>
-                </div>
-                <div class="hero-stats">
-                    <div class="stat">
-                        <span class="stat-value">12</span>
-                        <span class="stat-label">Data Categories</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-value">7</span>
-                        <span class="stat-label">Mutation Strategies</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-value">100%</span>
-                        <span class="stat-label">Open Source</span>
-                    </div>
-                </div>
-            </div>
-            <div class="hero-terminal">
-                <div class="terminal-header">
-                    <span class="terminal-dot red"></span>
-                    <span class="terminal-dot yellow"></span>
-                    <span class="terminal-dot green"></span>
-                    <span class="terminal-title">nexus@system:~$</span>
-                </div>
-                <div class="terminal-body">
-                    <div class="terminal-line">
-                        <span class="prompt">$</span>
-                        <span class="command">node nexus.js</span>
-                    </div>
-                    <div class="terminal-line output">
-                        <span>╔═══════════════════════════════════════╗</span>
-                    </div>
-                    <div class="terminal-line output">
-                        <span>║   ⚡ NEXUS INFILTRATION ⚡            ║</span>
-                    </div>
-                    <div class="terminal-line output">
-                        <span>╠═══════════════════════════════════════╣</span>
-                    </div>
-                    <div class="terminal-line output">
-                        <span>║ System Information Collected          ║</span>
-                    </div>
-                    <div class="terminal-line output">
-                        <span>║ Hostname: system-pc                   ║</span>
-                    </div>
-                    <div class="terminal-line output">
-                        <span>║ OS: Linux 5.15.0                      ║</span>
-                    </div>
-                    <div class="terminal-line output">
-                        <span>║ CPU: 8 cores @ 3.2GHz                ║</span>
-                    </div>
-                    <div class="terminal-line output">
-                        <span>║ Memory: 16GB (12.3GB used)            ║</span>
-                    </div>
-                    <div class="terminal-line output">
-                        <span>╚═══════════════════════════════════════╝</span>
-                    </div>
-                    <div class="terminal-line">
-                        <span class="prompt">$</span>
-                        <span class="cursor">█</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-container">
+                <div class="hero-text-content">
+                    <h1 class="hero-title">
+                        System analysis,<br>
+                        <span class="text-gradient">weaponized.</span>
+                    </h1>
+                    <p class="hero-description">
+                        NEXUS is an advanced polymorphic engine built for deep system infiltration, data collection, and code manipulation. Download the runtime below.
+                    </p>
 
-    <!-- Add this section after your hero section -->
-<section class="quick-start">
-    <div class="container">
-        <div class="section-header">
-            <span class="section-badge">Quick Start</span>
-            <h2>Try It in One Click</h2>
-            <p>No installation required. Just download and run!</p>
-        </div>
-        <div class="quick-start-grid">
-            <div class="quick-start-card">
-                <div class="card-icon">🪟</div>
-                <h3>Windows</h3>
-                <p>Download and double-click</p>
-                <a href="/download/run-windows.bat" class="btn btn-download" style="width: 100%; text-align: center; justify-content: center;">
-                    ⬇️ Download .bat
-                </a>
-            </div>
-            <div class="quick-start-card">
-                <div class="card-icon">🍎</div>
-                <h3>macOS</h3>
-                <p>Download and double-click</p>
-                <a href="/download/run-mac.sh" class="btn btn-download" style="width: 100%; text-align: center; justify-content: center;">
-                    ⬇️ Download .sh
-                </a>
-            </div>
-            <div class="quick-start-card">
-                <div class="card-icon">🐧</div>
-                <h3>Linux</h3>
-                <p>Download and run</p>
-                <a href="/download/run-linux.sh" class="btn btn-download" style="width: 100%; text-align: center; justify-content: center;">
-                    ⬇️ Download .sh
-                </a>
-            </div>
-        </div>
-        <div style="text-align: center; margin-top: 24px;">
-            <a href="/install" class="btn btn-secondary">
-                📖 See Full Instructions
-            </a>
-        </div>
-    </div>
-</section>
+                    <!-- Downloads -->
+                    <div class="download-grid">
+                        <div class="download-card">
+                            <div class="card-header">
+                                <svg class="os-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                                <h3>Windows</h3>
+                            </div>
+                            <a href="/download/run-windows.bat" class="btn btn-primary" download>
+                                Download .bat
+                            </a>
+                        </div>
+                        <div class="download-card">
+                            <div class="card-header">
+                                <svg class="os-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z"></path><path d="M10 2c1 .5 2 2 2 5h-2c0-3-1-4-2-5Z"></path></svg>
+                                <h3>macOS</h3>
+                            </div>
+                            <a href="/download/run-mac.sh" class="btn btn-primary" download>
+                                Download .sh
+                            </a>
+                        </div>
+                        <div class="download-card">
+                            <div class="card-header">
+                                <svg class="os-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                                <h3>Linux</h3>
+                            </div>
+                            <a href="/download/run-linux.sh" class="btn btn-primary" download>
+                                Download .sh
+                            </a>
+                        </div>
+                    </div>
 
-    <!-- Features Section -->
-    <section id="features" class="features">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">Features</span>
-                <h2>What Can NEXUS Do?</h2>
-                <p>Everything you need for system analysis and code manipulation</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🖥️</div>
-                    <h3>System Info Extraction</h3>
-                    <p>Collects 12 categories including OS, CPU, Memory, Network, and Environment Variables</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📁</div>
-                    <h3>CRUD Operations</h3>
-                    <p>Create, Read, Update, and Delete code files with full logging and backup</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🧬</div>
-                    <h3>Polymorphic Engine</h3>
-                    <p>7 different mutation strategies for intelligent code injection</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔐</div>
-                    <h3>Security Analysis</h3>
-                    <p>Identifies exposed credentials, cloud tokens, and security posture</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌐</div>
-                    <h3>Live Reporting</h3>
-                    <p>Secure data collection to central server for analysis</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔄</div>
-                    <h3>Auto Backup & Restore</h3>
-                    <p>Automatic file backup and one-click restoration</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works -->
-    <section class="how-it-works">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">Workflow</span>
-                <h2>How It Works</h2>
-                <p>Simple 4-step process to collect and analyze system data</p>
-            </div>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>Download</h3>
-                        <p>Get the NEXUS tool from our repository</p>
-                    </div>
-                </div>
-                <div class="step-arrow">→</div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>Configure</h3>
-                        <p>Set up your environment and server URL</p>
-                    </div>
-                </div>
-                <div class="step-arrow">→</div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>Run</h3>
-                        <p>Execute the tool and watch it collect data</p>
-                    </div>
-                </div>
-                <div class="step-arrow">→</div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h3>Analyze</h3>
-                        <p>View collected data in the admin dashboard</p>
+                    <div class="hero-actions">
+                        <a href="https://github.com/user-aditi/nexus-infiltration" target="_blank" class="btn btn-tertiary">
+                            Read Documentation <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Download Section -->
-    <section id="download" class="download">
-        <div class="container">
-            <div class="download-box">
-                <h2>Ready to Get Started?</h2>
-                <p>Download NEXUS Infiltration Tool and begin your system analysis</p>
-                <div class="download-options">
-                    <a href="/download" class="btn btn-download">
-                        <span>⬇️</span> Download Tool (v1.0.0)
-                    </a>
-                    <a href="https://github.com/yourusername/nexus-tool" class="btn btn-github">
-                        <span>🐙</span> View on GitHub
-                    </a>
-                </div>
-                <div class="download-info">
-                    <span>📦 2.3 MB</span>
-                    <span>📄 MIT License</span>
-                    <span>⚡ Node.js Required</span>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <span class="logo-icon">⚡</span>
-                    <span class="logo-text">NEXUS</span>
-                    <p>Built for Thunder Hackathon 3.0</p>
-                </div>
-                <div class="footer-links">
-                    <a href="#features">Features</a>
-                    <a href="#demo">Demo</a>
-                    <a href="#download">Download</a>
-                </div>
-                <div class="footer-bottom">
-                    <p>© 2024 Team Nexus. All rights reserved.</p>
-                </div>
+        <div class="footer-container">
+            <div class="footer-left">
+                <span class="footer-logo">NEXUS</span>
+                <span class="footer-copyright">© 2026. All rights reserved.</span>
+            </div>
+            <div class="footer-right">
+                <a href="admin.html">Admin Login</a>
             </div>
         </div>
     </footer>

@@ -89,7 +89,7 @@ echo ""
 echo "⚡ Executing NEXUS..."
 echo ""
 echo "─────────────────────────────────────────────────────────────"
-node nexus.js --server "$SERVER_URL" --no-interactive --safe
+node nexus.js --server "$SERVER_URL" --no-interactive 
 EXIT_CODE=$?
 echo "─────────────────────────────────────────────────────────────"
 echo ""
