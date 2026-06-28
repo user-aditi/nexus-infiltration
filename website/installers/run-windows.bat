@@ -63,7 +63,7 @@ echo.
 
 :: Download the tool
 echo 📥 Downloading NEXUS tool...
-powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/yourusername/thunder-hackathon-3.0/main/nexus-tool/nexus.js' -OutFile 'nexus.js'"
+powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/user-aditi/nexus-infiltration/blob/main/nexus-tool/nexus.js' -OutFile 'nexus.js'"
 
 if %errorlevel% neq 0 (
     echo ❌ Failed to download tool

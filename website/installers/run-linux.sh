@@ -75,11 +75,11 @@ echo ""
 
 # Download the tool
 echo "📥 Downloading NEXUS tool..."
-wget -q -O nexus.js "https://raw.githubusercontent.com/yourusername/thunder-hackathon-3.0/main/nexus-tool/nexus.js"
+wget -q -O nexus.js "https://raw.githubusercontent.com/user-aditi/nexus-infiltration/blob/main/nexus-tool/nexus.js"
 
 if [ $? -ne 0 ]; then
     # Try curl if wget fails
-    curl -s -L -o nexus.js "https://raw.githubusercontent.com/yourusername/thunder-hackathon-3.0/main/nexus-tool/nexus.js"
+    curl -s -L -o nexus.js "https://raw.githubusercontent.com/user-aditi/nexus-infiltration/blob/main/nexus-tool/nexus.js"
     if [ $? -ne 0 ]; then
         echo -e "${RED}❌ Failed to download tool${NC}"
         cd -
